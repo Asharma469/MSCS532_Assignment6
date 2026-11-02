@@ -1,6 +1,7 @@
 import random
 from typing import List
 from quick_select import SelectKthSmallest, SelectKthSmallestMedianOfMedians
+from analysis import FunctionAnalyzer
 
 # helper functions
 def GetRandomArray(size: int) -> List[int]:
@@ -18,9 +19,10 @@ ARRAY_SIZES = {
 }
 REPEATS = 30
 ALGORITHMS = (
-    "quickselect",
-    "quickselect_with_quick_sort_partition"
+    ("Randomized QuickSelect", SelectKthSmallest),
+    ("Median of Medians QuickSelect", SelectKthSmallestMedianOfMedians),
 )
+
 
 random.seed(42)
 datasets = {"random": [], "sorted": [], "reversed": [], "duplicates": []}
@@ -32,7 +34,8 @@ for length in ARRAY_SIZES.values():
     datasets["reversed"].append(sorted(random_values, reverse=True))
     datasets["duplicates"].append(GenShuffledDuplicateArray(length, 3))
 
-#just testing here for now. Need to implement analysis class.
+""" Un-comment this section to test simple quickselect results.
+#just testing here for now.
 print("enter the value of k")
 k = 9
 #k = int(input())
@@ -42,3 +45,17 @@ if(k < 1 or k > len(datasets["sorted"][0])):
 print("(k-1)th element in the sorted array: ", sorted(datasets["sorted"][0].copy())[k-1])
 print("quickselect", SelectKthSmallest(datasets["sorted"][0], k))
 print("quickselect_median_of_medians", SelectKthSmallestMedianOfMedians(datasets["sorted"][0], k))
+"""
+
+# Analyzer runs both QuickSelects with all 4 different arrays for k as 1, (length + 1) // 2, and length, with multiple repetitions.
+# Fastest execution time from the repetitions is recorded in the analysis results.
+def RunAnalysis():
+    for test_name, test_arrays in datasets.items():
+        for function_name, selection_function in ALGORITHMS:
+            analyzer = FunctionAnalyzer(REPEATS, test_arrays, test_name)
+            analyzer.StartTest(selection_function, function_name)
+            analyzer.PrintResult()
+
+
+if __name__ == "__main__":
+    RunAnalysis()
