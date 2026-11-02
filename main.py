@@ -1,6 +1,6 @@
 import random
 from typing import List
-from quick_select import SelectKthSmallest
+from quick_select import SelectKthSmallest, SelectKthSmallestMedianOfMedians
 
 # helper functions
 def GetRandomArray(size: int) -> List[int]:
@@ -12,9 +12,9 @@ def GenShuffledDuplicateArray(size: int, values: int) -> List[int]:
 
 
 ARRAY_SIZES = {
-    "small": 10,
-    "medium": 20,
-    "large": 30,
+    "small": 100,
+    "medium": 300,
+    "large": 1000,
 }
 REPEATS = 30
 ALGORITHMS = (
@@ -33,5 +33,12 @@ for length in ARRAY_SIZES.values():
     datasets["duplicates"].append(GenShuffledDuplicateArray(length, 3))
 
 #just testing here for now. Need to implement analysis class.
-print(datasets["sorted"][0])
-print("quickselect", SelectKthSmallest(datasets["sorted"][0], 4))
+print("enter the value of k")
+k = 9
+#k = int(input())
+print("k is", k)
+if(k < 1 or k > len(datasets["sorted"][0])):
+    raise ValueError("k must be between 1 and the number of values")
+print("(k-1)th element in the sorted array: ", sorted(datasets["sorted"][0].copy())[k-1])
+print("quickselect", SelectKthSmallest(datasets["sorted"][0], k))
+print("quickselect_median_of_medians", SelectKthSmallestMedianOfMedians(datasets["sorted"][0], k))
