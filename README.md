@@ -2,6 +2,8 @@
 
 This project implements QuickSelect algorithms and elementary data structures.
 
+QuickSelect is randomized and using Median of Medians method.
+
 It also has QuickSort implementations choosing the pivot at:
 - first element
 - middle element
