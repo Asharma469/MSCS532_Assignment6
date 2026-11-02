@@ -1,6 +1,7 @@
 import random
 from typing import List
 from data_structures import Array, Stack, Queue
+from linked_list import LinkedList
 from quick_select import SelectKthSmallest, SelectKthSmallestMedianOfMedians
 from analysis import FunctionAnalyzer
 
@@ -95,3 +96,14 @@ testQueue.dequeue()
 testQueue.print()
 testQueue.dequeue()
 testQueue.print()
+
+print("_____________________________")
+
+testLinkedList = LinkedList()
+testLinkedList.insert(0, 1)
+testLinkedList.insert(1, 2)
+testLinkedList.insert(2, 3)
+testLinkedList.print()
+testLinkedList.delete(1)
+testLinkedList.print()
+print("_____________________________")
