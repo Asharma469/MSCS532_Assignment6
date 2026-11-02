@@ -1,5 +1,6 @@
 import random
 from typing import List
+from data_structures import Array
 from quick_select import SelectKthSmallest, SelectKthSmallestMedianOfMedians
 from analysis import FunctionAnalyzer
 
@@ -59,3 +60,15 @@ def RunAnalysis():
 
 if __name__ == "__main__":
     RunAnalysis()
+
+
+print("_____________________________")
+print("_____________________________")
+
+testArr = Array([1, 2, 3, 4, 5])
+testArr.print()
+testArr.insert(2, 10)
+testArr.print()
+testArr.delete(2)
+testArr.print()
+
