@@ -1,4 +1,4 @@
-from randomized_quick_sort import RandomizedPartition
+from randomized_quick_sort import Partition, RandomizedPartition
 
 # QuickSelect algorithm using the randomized partition from randomized quicksort, which I already implemented in randomized_quick_sort.py.
 def SelectKthSmallest(inputArray: list[int], k: int) -> int:
@@ -9,22 +9,23 @@ def SelectKthSmallest(inputArray: list[int], k: int) -> int:
 
     items = list(inputArray)
     target = k - 1  # index of kth smallest element in sorted array.
-    left = 0
-    right = len(items) - 1
+    return _SelectKthSmallestRecursive(items, 0, len(items) - 1, target)
+
+
+def _SelectKthSmallestRecursive(
+    items: list[int], left: int, right: int, target: int
+) -> int:
+    if left == right:
+        return items[left]
 
     # Quick select also partitions the array around a random pivot, like quick sort.
     # The random pivot helps avoid consistently poor partitions.
-    while left <= right:
-        # RandomizedPartition uses the same three-way partitioning as randomized quicksort.
-        # It returns the bounds around the values equal to the pivot.
-        left_end, right_start = RandomizedPartition(items, left, right)
+    # RandomizedPartition returns the bounds around values equal to the pivot.
+    left_end, right_start = RandomizedPartition(items, left, right)
 
-        # Only continue on the partition that could contain the target element.
-        if target <= left_end:
-            right = left_end
-        elif target >= right_start:
-            left = right_start
-        else:
-            return items[target]
-
-    return -1
+    # Recurse only into the partition that could contain the target element.
+    if target <= left_end:
+        return _SelectKthSmallestRecursive(items, left, left_end, target)
+    if target >= right_start:
+        return _SelectKthSmallestRecursive(items, right_start, right, target)
+    return items[target]
