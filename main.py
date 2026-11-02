@@ -1,6 +1,6 @@
 import random
 from typing import List
-from data_structures import Array
+from data_structures import Array, Stack, Queue
 from quick_select import SelectKthSmallest, SelectKthSmallestMedianOfMedians
 from analysis import FunctionAnalyzer
 
@@ -72,3 +72,26 @@ testArr.print()
 testArr.delete(2)
 testArr.print()
 
+print("_____________________________")
+
+testStack = Stack()
+testStack.push(1)
+testStack.push(2)
+testStack.push(3)
+testStack.print()
+testStack.pop()
+testStack.print()
+testStack.pop() 
+testStack.print()
+
+print("_____________________________")
+
+testQueue = Queue()
+testQueue.enqueue(1)
+testQueue.enqueue(2)
+testQueue.enqueue(3)
+testQueue.print()
+testQueue.dequeue()
+testQueue.print()
+testQueue.dequeue()
+testQueue.print()
